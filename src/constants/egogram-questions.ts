@@ -64,7 +64,7 @@ export const EGOGRAM_QUESTIONS: EgogramQuestion[] = [
     title: "Colhe várias informações (fatos) e os analisa bem?",
     target: "A",
   },
-  { title: "Você é targetísta?", target: "CL" },
+  { title: "Você é egoísta?", target: "CL" },
   { title: 'Diz: "Desculpe-me", "Sinto muito"?', target: "CA" },
   {
     title: "Julga os fatos sem interferir a sua opinião pessoal?",
