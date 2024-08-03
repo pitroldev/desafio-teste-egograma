@@ -115,7 +115,7 @@ export const EGOGRAM_TYPE_DESCRIPTIONS: Record<EgogramType, string> = {
 };
 
 export const EGOGRAM_OPTIONS: Array<{
-  value: string;
+  value: EgogramType;
   label: string;
   description: string;
 }> = [

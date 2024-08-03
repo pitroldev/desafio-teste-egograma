@@ -62,16 +62,18 @@ export default function EgogramResultsPage() {
   const statisticAnswers = mappedAnswers.reduce<
     Array<{
       name: string;
+      target: EgogramType;
       score: number;
       fill: string;
     }>
   >((acc, { target, score }) => {
     const name = EGOGRAM_TYPES_DICT[target];
-    const targetIndex = acc.findIndex((item) => item.name === name);
+    const targetIndex = acc.findIndex((item) => item.target === target);
 
     if (targetIndex === -1) {
       acc.push({
         name,
+        target,
         score,
         fill: EGOGRAM_COLORS[target],
       });
@@ -112,11 +114,11 @@ export default function EgogramResultsPage() {
           >
             <PieChart>
               <ChartTooltip
-                content={<ChartTooltipContent nameKey="name" hideLabel />}
+                content={<ChartTooltipContent nameKey="target" hideLabel />}
               />
               <Pie data={statisticAnswers} dataKey="score">
                 <LabelList
-                  dataKey="name"
+                  dataKey="target"
                   className="fill-background"
                   stroke="none"
                   fontSize={12}
@@ -140,8 +142,13 @@ export default function EgogramResultsPage() {
                 key={option.value}
                 className="flex flex-col justify-start text-left p-4"
               >
-                <CardTitle className="text-lg font-bold">
-                  {option.label}
+                <CardTitle
+                  className="text-lg font-bold"
+                  style={{
+                    color: EGOGRAM_COLORS[option.value],
+                  }}
+                >
+                  {option.label} <span>({option.value})</span>
                 </CardTitle>
                 <h3 className="text-sm font-semibold text-gray-500">
                   Você marcou {score} pontos ({percentage.toFixed(2)}%)
