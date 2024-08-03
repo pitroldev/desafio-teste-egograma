@@ -88,8 +88,17 @@ export default function EgogramTestPage() {
             </Button>
           )}
           {isAtLastQuestion && (
-            <Link href={`/egograma/${resultsKey}`}>
-              <Button className="flex gap-1 items-center">
+            <Link
+              href={
+                answers[questionIndex] === null
+                  ? "#"
+                  : `/egograma/${resultsKey}`
+              }
+            >
+              <Button
+                className="flex gap-1 items-center"
+                disabled={answers[questionIndex] === null}
+              >
                 Finalizar teste <MdArrowForward />
               </Button>
             </Link>

@@ -8,7 +8,10 @@ export function decodeEgogramResult(encoded: string): (number | null)[] {
   try {
     const jsonString = Buffer.from(encoded, "base64").toString("utf-8");
 
-    return JSON.parse(jsonString);
+    const parsedArray = JSON.parse(jsonString);
+    if (!Array.isArray(parsedArray)) throw new Error("Invalid array");
+
+    return parsedArray;
   } catch {
     return [];
   }
