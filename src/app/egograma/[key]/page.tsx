@@ -122,6 +122,13 @@ export default function EgogramResultsPage() {
                   className="fill-background"
                   stroke="none"
                   fontSize={12}
+                  formatter={(target: string) => {
+                    const targetScore = statisticAnswers.find(
+                      (item) => item.target === target
+                    );
+                    if (!targetScore?.score) return null;
+                    return target;
+                  }}
                 />
               </Pie>
             </PieChart>
