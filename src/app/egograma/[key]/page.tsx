@@ -45,6 +45,8 @@ const chartConfig: ChartConfig = {
   },
 };
 
+const EGOGRAM_TYPES_ORDER = ["CL", "CA", "A", "PC", "PA"];
+
 export default function EgogramResultsPage() {
   const { key } = useParams<{ key: string }>();
 
@@ -59,31 +61,38 @@ export default function EgogramResultsPage() {
     };
   }) as Array<{ score: number; target: EgogramType }>;
 
-  const statisticAnswers = mappedAnswers.reduce<
-    Array<{
-      name: string;
-      target: EgogramType;
-      score: number;
-      fill: string;
-    }>
-  >((acc, { target, score }) => {
-    const name = EGOGRAM_TYPES_DICT[target];
-    const targetIndex = acc.findIndex((item) => item.target === target);
+  const statisticAnswers = mappedAnswers
+    .reduce<
+      Array<{
+        name: string;
+        target: EgogramType;
+        score: number;
+        fill: string;
+      }>
+    >((acc, { target, score }) => {
+      const name = EGOGRAM_TYPES_DICT[target];
+      const targetIndex = acc.findIndex((item) => item.target === target);
 
-    if (targetIndex === -1) {
-      acc.push({
-        name,
-        target,
-        score,
-        fill: EGOGRAM_COLORS[target],
-      });
+      if (targetIndex === -1) {
+        acc.push({
+          name,
+          target,
+          score,
+          fill: EGOGRAM_COLORS[target],
+        });
+        return acc;
+      }
+
+      acc[targetIndex].score += score;
+
       return acc;
-    }
-
-    acc[targetIndex].score += score;
-
-    return acc;
-  }, []);
+    }, [])
+    .sort((a, b) => {
+      return (
+        EGOGRAM_TYPES_ORDER.indexOf(a.target) -
+        EGOGRAM_TYPES_ORDER.indexOf(b.target)
+      );
+    });
 
   const sumScores = statisticAnswers.reduce(
     (acc, item) => acc + (item.score || 0),
