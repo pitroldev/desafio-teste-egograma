@@ -28,11 +28,11 @@ export const EGOGRAM_QUESTIONS: EgogramQuestion[] = [
   { title: "Vive se queixando e se lamentando?", target: "CA" },
   { title: "Gosta de ajudar os outros?", target: "PA" },
   { title: "Examina a reação alheia?", target: "CA" },
-  { title: 'Costuma questionr "Por quê? Como?"', target: "A" },
+  { title: 'Costuma questionar "Por quê? Como?"', target: "A" },
   { title: "É moralista?", target: "PC" },
   { title: "Julga corretamente os fatos?", target: "A" },
   {
-    title: 'Manifesta expressões de espanto: "Não diga!"',
+    title: 'Manifesta expressões de espanto: "Não diga!"?',
     target: "CL",
   },
   {

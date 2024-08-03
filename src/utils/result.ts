@@ -1,6 +1,8 @@
 export function encodeEgogramResult(answers: (number | null)[]): string {
-  const strigifiedAnswers = answers.map((a) => a?.toString()) as string[];
-  const joinedAnswers = strigifiedAnswers.join("");
+  const stringifiedAnswers = answers.map((a) =>
+    a === null ? "null" : a.toString()
+  );
+  const joinedAnswers = stringifiedAnswers.join("");
 
   return encodeURI(Buffer.from(joinedAnswers).toString("base64"));
 }
