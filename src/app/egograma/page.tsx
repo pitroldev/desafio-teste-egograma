@@ -46,7 +46,7 @@ export default function EgogramTestPage() {
   const resultsKey = encodeEgogramResult(answers);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4">
       <div className="flex flex-col gap-6 w-full items-center">
         <Card className="max-w-xl w-full min-h-72 gap-4 flex flex-col p-8">
           <CardTitle>
@@ -67,9 +67,9 @@ export default function EgogramTestPage() {
           ))}
         </Card>
 
-        <div className="flex items-center gap-4 justify-between max-w-xl w-full">
+        <div className="flex max-sm:flex-col-reverse items-center gap-4 justify-between max-w-xl w-full">
           <Button
-            className="flex gap-1 items-center"
+            className="flex gap-1 items-center max-sm:w-full"
             variant={"outline"}
             disabled={questionIndex === 0}
             onClick={handlePreviousQuestion}
@@ -79,7 +79,7 @@ export default function EgogramTestPage() {
           </Button>
           {!isAtLastQuestion && (
             <Button
-              className="flex gap-1 items-center"
+              className="flex gap-1 items-center max-sm:w-full"
               disabled={answers[questionIndex] === null}
               onClick={handleNextQuestion}
             >

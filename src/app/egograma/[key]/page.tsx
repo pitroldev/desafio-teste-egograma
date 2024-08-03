@@ -103,7 +103,7 @@ export default function EgogramResultsPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 pb-12">
       <div className="flex flex-col gap-6 max-w-2xl text-center items-center">
         <h1 className="text-2xl font-bold">Resultados do Teste de Egograma</h1>
 
@@ -135,9 +135,9 @@ export default function EgogramResultsPage() {
           </ChartContainer>
         </section>
 
-        <div className="flex items-center gap-4 pt-6">
+        <div className="flex items-center max-sm:flex-col gap-4 max-sm:w-full">
           <Button
-            className="flex items-center gap-2 w-56"
+            className="flex items-center gap-2 w-56 max-sm:w-full"
             onClick={onShareClick}
           >
             <MdShare />
@@ -145,7 +145,7 @@ export default function EgogramResultsPage() {
           </Button>
 
           <Button
-            className="flex items-center gap-2 w-56"
+            className="flex items-center gap-2 w-56 max-sm:w-full"
             onClick={onCopyToClipboard}
           >
             <MdCopyAll />
@@ -186,8 +186,10 @@ export default function EgogramResultsPage() {
           })}
         </section>
 
-        <Link href="/" className="w-fit">
-          <Button className="w-56">Fazer o teste novamente</Button>
+        <Link href="/" className="w-fit max-sm:w-full">
+          <Button className="w-56 max-sm:w-full">
+            Fazer o teste novamente
+          </Button>
         </Link>
       </div>
     </main>

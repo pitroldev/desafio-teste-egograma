@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4">
       <div className="flex flex-col gap-6 max-w-2xl text-center items-center">
         <h1 className="text-4xl font-bold">Teste de Egograma</h1>
         <p className="text-lg">
