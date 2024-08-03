@@ -135,6 +135,24 @@ export default function EgogramResultsPage() {
           </ChartContainer>
         </section>
 
+        <div className="flex items-center gap-4 pt-6">
+          <Button
+            className="flex items-center gap-2 w-56"
+            onClick={onShareClick}
+          >
+            <MdShare />
+            <span>Compartilhar resultados</span>
+          </Button>
+
+          <Button
+            className="flex items-center gap-2 w-56"
+            onClick={onCopyToClipboard}
+          >
+            <MdCopyAll />
+            <span>Copiar link dos resultados</span>
+          </Button>
+        </div>
+
         <section className="flex flex-col gap-4">
           {EGOGRAM_OPTIONS.map((option) => {
             const result = statisticAnswers.find(
@@ -167,24 +185,6 @@ export default function EgogramResultsPage() {
             );
           })}
         </section>
-
-        <div className="flex items-center gap-4 pt-6">
-          <Button
-            className="flex items-center gap-2 w-56"
-            onClick={onShareClick}
-          >
-            <MdShare />
-            <span>Compartilhar resultados</span>
-          </Button>
-
-          <Button
-            className="flex items-center gap-2 w-56"
-            onClick={onCopyToClipboard}
-          >
-            <MdCopyAll />
-            <span>Copiar link dos resultados</span>
-          </Button>
-        </div>
 
         <Link href="/" className="w-fit">
           <Button className="w-56">Fazer o teste novamente</Button>
