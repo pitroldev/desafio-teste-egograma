@@ -7,6 +7,7 @@ import { MdCopyAll, MdShare } from "react-icons/md";
 import { decodeEgogramResult } from "@/utils/result";
 import { EGOGRAM_COLORS } from "@/constants/chart";
 import {
+  EGOGRAM_OPTIONS,
   EGOGRAM_QUESTIONS,
   EGOGRAM_TYPES_DICT,
 } from "@/constants/egogram-questions";
@@ -19,6 +20,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { EgogramType } from "@/types/egogram";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 const chartConfig: ChartConfig = {
   CL: {
@@ -47,7 +49,6 @@ export default function EgogramResultsPage() {
   const { key } = useParams<{ key: string }>();
 
   const decodedAnswers = decodeEgogramResult(key);
-  console.log("decodedAnswers", decodedAnswers);
 
   const mappedAnswers = decodedAnswers.map((score, idx) => {
     const target = EGOGRAM_QUESTIONS[idx]?.target;
@@ -60,16 +61,20 @@ export default function EgogramResultsPage() {
 
   const statisticAnswers = mappedAnswers.reduce<
     Array<{
+      name: string;
       score: number;
-      target: string;
       fill: string;
     }>
   >((acc, { target, score }) => {
-    const targetIndex = acc.findIndex((item) => item.target === target);
+    const name = EGOGRAM_TYPES_DICT[target];
+    const targetIndex = acc.findIndex((item) => item.name === name);
 
     if (targetIndex === -1) {
-      const color = EGOGRAM_COLORS[target];
-      acc.push({ target, score, fill: color });
+      acc.push({
+        name,
+        score,
+        fill: EGOGRAM_COLORS[target],
+      });
       return acc;
     }
 
@@ -77,6 +82,11 @@ export default function EgogramResultsPage() {
 
     return acc;
   }, []);
+
+  const sumScores = statisticAnswers.reduce(
+    (acc, item) => acc + (item.score || 0),
+    0
+  );
 
   const onShareClick = () => {
     navigator.share({
@@ -95,18 +105,18 @@ export default function EgogramResultsPage() {
       <div className="flex flex-col gap-6 max-w-2xl text-center items-center">
         <h1 className="text-2xl font-bold">Resultados do Teste de Egograma</h1>
 
-        <div className="w-64 h-64">
+        <section className="w-64 h-64">
           <ChartContainer
             config={chartConfig}
             className="mx-auto aspect-square max-h-[250px]"
           >
             <PieChart>
               <ChartTooltip
-                content={<ChartTooltipContent nameKey="target" hideLabel />}
+                content={<ChartTooltipContent nameKey="name" hideLabel />}
               />
               <Pie data={statisticAnswers} dataKey="score">
                 <LabelList
-                  dataKey="target"
+                  dataKey="name"
                   className="fill-background"
                   stroke="none"
                   fontSize={12}
@@ -114,9 +124,37 @@ export default function EgogramResultsPage() {
               </Pie>
             </PieChart>
           </ChartContainer>
-        </div>
+        </section>
 
-        <div className="flex items-center gap-4">
+        <section className="flex flex-col gap-4">
+          {EGOGRAM_OPTIONS.map((option) => {
+            const result = statisticAnswers.find(
+              (item) => item.name === option.label
+            );
+
+            const score = result?.score || 0;
+            const percentage = (score / sumScores) * 100;
+
+            return (
+              <Card
+                key={option.value}
+                className="flex flex-col justify-start text-left p-4"
+              >
+                <CardTitle className="text-lg font-bold">
+                  {option.label}
+                </CardTitle>
+                <h3 className="text-sm font-semibold text-gray-500">
+                  Você marcou {score} pontos ({percentage.toFixed(2)}%)
+                </h3>
+                <CardContent className="p-0 pt-2">
+                  {option.description}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </section>
+
+        <div className="flex items-center gap-4 pt-6">
           <Button
             className="flex items-center gap-2 w-56"
             onClick={onShareClick}

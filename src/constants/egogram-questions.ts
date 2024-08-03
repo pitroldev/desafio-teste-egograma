@@ -106,10 +106,42 @@ export const EGOGRAM_TYPES_DICT: Record<EgogramType, string> = {
   PA: "Pai Amigo",
 };
 
-const EGOGRAM_TYPE_DESCRIPTIONS: Record<EgogramType, string> = {
+export const EGOGRAM_TYPE_DESCRIPTIONS: Record<EgogramType, string> = {
   CL: "A Criança Livre é espontânea e livre, desprezando os outros e valorizando as tradições.",
   CA: "A Criança Adaptada procura harmonizar-se com os que o cercam, é cerimoniosa e retraída.",
   A: "O Adulto analisa bem a realidade e toma decisões, expressando logo os sentimentos na fisionomia.",
   PC: "O Pai Crítico é crítico às coisas e fatos, valoriza o senso de responsabilidade e é rigoroso com os fracassos e defeitos alheios.",
   PA: "O Pai Amigo percebe as qualidades alheias e as ressalta, interessa-se pelas conversas alheias e gosta de ajudar os outros.",
 };
+
+export const EGOGRAM_OPTIONS: Array<{
+  value: string;
+  label: string;
+  description: string;
+}> = [
+  {
+    value: "CL",
+    label: EGOGRAM_TYPES_DICT["CL"],
+    description: EGOGRAM_TYPE_DESCRIPTIONS.CL,
+  },
+  {
+    value: "CA",
+    label: EGOGRAM_TYPES_DICT["CA"],
+    description: EGOGRAM_TYPE_DESCRIPTIONS.CA,
+  },
+  {
+    value: "A",
+    label: EGOGRAM_TYPES_DICT["A"],
+    description: EGOGRAM_TYPE_DESCRIPTIONS.A,
+  },
+  {
+    value: "PC",
+    label: EGOGRAM_TYPES_DICT["PC"],
+    description: EGOGRAM_TYPE_DESCRIPTIONS.PC,
+  },
+  {
+    value: "PA",
+    label: EGOGRAM_TYPES_DICT["PA"],
+    description: EGOGRAM_TYPE_DESCRIPTIONS.PA,
+  },
+];
