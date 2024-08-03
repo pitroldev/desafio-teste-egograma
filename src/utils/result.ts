@@ -1,17 +1,15 @@
 export function encodeEgogramResult(answers: (number | null)[]): string {
-  const stringifiedAnswers = answers.map((a) =>
-    a === null ? "null" : a.toString()
-  );
-  const joinedAnswers = stringifiedAnswers.join("");
+  const jsonString = JSON.stringify(answers);
 
-  return encodeURI(Buffer.from(joinedAnswers).toString("base64"));
+  return encodeURI(Buffer.from(jsonString).toString("base64"));
 }
 
 export function decodeEgogramResult(encoded: string): (number | null)[] {
-  const decoded = Buffer.from(decodeURI(encoded), "base64").toString();
+  try {
+    const jsonString = Buffer.from(encoded, "base64").toString("utf-8");
 
-  return decoded
-    .split("")
-    .map((a) => (a === "" ? null : parseInt(a)))
-    .filter((a) => !isNaN(a ?? NaN));
+    return JSON.parse(jsonString);
+  } catch {
+    return [];
+  }
 }
