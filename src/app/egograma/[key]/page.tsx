@@ -107,7 +107,7 @@ export default function EgogramResultsPage() {
       <div className="flex flex-col gap-6 max-w-2xl text-center items-center">
         <h1 className="text-2xl font-bold">Resultados do Teste de Egograma</h1>
 
-        <section className="w-64 h-64">
+        <section className="w-64">
           <ChartContainer
             config={chartConfig}
             className="mx-auto aspect-square max-h-[250px]"
