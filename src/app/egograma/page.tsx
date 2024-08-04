@@ -89,6 +89,7 @@ export default function EgogramTestPage() {
           )}
           {isAtLastQuestion && (
             <Link
+              className="w-fit max-sm:w-full"
               href={
                 answers[questionIndex] === null
                   ? "#"
@@ -96,7 +97,7 @@ export default function EgogramTestPage() {
               }
             >
               <Button
-                className="flex gap-1 items-center"
+                className="flex gap-1 items-center max-sm:w-full"
                 disabled={answers[questionIndex] === null}
               >
                 Finalizar teste <MdArrowForward />
